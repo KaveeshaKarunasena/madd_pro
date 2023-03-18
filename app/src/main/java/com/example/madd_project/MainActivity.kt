@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        // Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable( ColorDrawable(getResources().getColor(R.color.yellow)))
+
         val button: Button = findViewById(R.id.backBtn)
 
         button.setOnClickListener { view ->

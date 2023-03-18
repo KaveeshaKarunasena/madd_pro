@@ -5,7 +5,7 @@
     <string name="mainactivity">MainActivity</string>
     <string name="enter_full_name">Full Name</string>
     <string name="address">Address</string>
-    <string name="email">Email</string
+    <string name="email">Email</string>
     <string name="contactno">Contact No</string>
     <string name="new_password">New Password</string>
     <string name="confirm_password">Confirm Password</string>
@@ -41,4 +41,8 @@
     <string name="enter_the_quantity">Enter the Quantity</string>
     <string name="add_location_to_pick">Add Location to Pick</string>
     <string name="date">March 27</string>
+    <string name="home_icon">Home</string>
+    <string name="feed_icon">Feed</string>
+    <string name="notification_icon">Notification</string>
+    <string name="profile_icon">Profile</string>
 </resources>

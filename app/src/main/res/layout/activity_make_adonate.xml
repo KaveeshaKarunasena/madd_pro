@@ -101,7 +101,7 @@
         android:width="180dp"
         android:backgroundTint="@color/yellow"
         android:rotationX="0"
-        android:text="@string/sign_in"
+        android:text="Donate"
         app:cornerRadius="15dp" />
 
 

@@ -2,19 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:title="Home"
+        android:title="@string/home_icon"
         android:id="@+id/home"
         android:icon="@drawable/ic_home"/>
     <item
-        android:title="Feed"
+        android:title="@string/feed_icon"
         android:id="@+id/feed"
         android:icon="@drawable/ic_feed"/>
     <item
-        android:title="Notification"
+        android:title="@string/notification_icon"
         android:id="@+id/notification"
         android:icon="@drawable/ic_notifications"/>
     <item
-        android:title="Profile"
+        android:title="@string/profile_icon"
         android:id="@+id/profile"
         android:icon="@drawable/ic_person"/>
 
