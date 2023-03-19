@@ -17,7 +17,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/dashCard4"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="150dp"
         android:layout_row="0"
         android:layout_rowWeight="1"
         android:layout_column="0"
@@ -30,9 +30,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="150dp"
         android:layout_gravity="center"
         android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="360dp"
+            app:srcCompat="@drawable/ic_profile" />
 
         <TextView
             android:id="@+id/hiText"
@@ -58,6 +65,7 @@
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold" />
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>
     <GridLayout

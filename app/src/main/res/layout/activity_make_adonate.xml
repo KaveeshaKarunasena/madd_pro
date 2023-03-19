@@ -17,12 +17,21 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="32dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="375dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="360dp"
         android:layout_marginTop="16dp"
         android:backgroundTint="#FFFFFF"
         app:srcCompat="@drawable/ic_shopping_cart" />
+
+    <TextView
+        android:id="@+id/addDonate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/place_the_donation"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <SeekBar
         android:id="@+id/seekBar"
