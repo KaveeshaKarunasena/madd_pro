@@ -9,6 +9,9 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
+import com.example.madd_project.fragments.HomeFragment
+import com.example.madd_project.fragments.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -21,23 +24,39 @@ class Dashboard : AppCompatActivity() {
         val profile : View = nav.findViewById(R.id.profile)
 
         val feed : View = nav.findViewById(R.id.feed)
+        val home : View = nav.findViewById(R.id.home)
 
-        feed.setOnClickListener { data ->
-            startActivity(
-                Intent(
-                    this@Dashboard,
-                    MakeADonate::class.java
-                )
-            )
+        val fragmentUser = ProfileFragment()
+        val fragmentHome = HomeFragment()
+
+
+
+        home.setOnClickListener { data ->
+
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.container, fragmentHome)
+                commit()
+            }
+//            startActivity(
+//                Intent(
+//                    this@Dashboard,
+//                    MakeADonate::class.java
+//                )
+//            )
         }
 
         profile.setOnClickListener { data ->
-            startActivity(
-                Intent(
-                    this@Dashboard,
-                    Cusprofile::class.java
-                )
-            )
+
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.container, fragmentUser)
+                commit()
+            }
+//            startActivity(
+//                Intent(
+//                    this@Dashboard,
+//                    Cusprofile::class.java
+//                )
+//            )
         }
     }
 }

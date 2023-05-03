@@ -14,16 +14,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         FirebaseApp.initializeApp(this);
-        val button: Button = findViewById(R.id.backBtn)
+//        val button: Button = findViewById(R.id.backBtn)
 
-        button.setOnClickListener { view ->
-            startActivity(
-                Intent(
-                    this@MainActivity,
-                    SingUp::class.java
-                )
-            )
-        }
+//        button.setOnClickListener { view ->
+//            startActivity(
+//                Intent(
+//                    this@MainActivity,
+//                    SingUp::class.java
+//                )
+//            )
+//        }
     }
 
     // this event will enable the back

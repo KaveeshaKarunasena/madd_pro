@@ -19,6 +19,7 @@ class SignIn : AppCompatActivity() {
 
 
         firebaseAuth = FirebaseAuth.getInstance()
+        val uid = firebaseAuth.currentUser?.uid
         binding.textView.setOnClickListener {
             val intent = Intent(this,SingUp::class.java)
             startActivity(intent)
@@ -46,12 +47,12 @@ class SignIn : AppCompatActivity() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        if(firebaseAuth.currentUser != null){
-            val intent = Intent(this, Dashboard::class.java)
-            startActivity(intent)
-        }
-    }
+//    override fun onStart() {
+//        super.onStart()
+//
+//        if(firebaseAuth.currentUser != null){
+//            val intent = Intent(this, Dashboard::class.java)
+//            startActivity(intent)
+//        }
+//    }
 }
