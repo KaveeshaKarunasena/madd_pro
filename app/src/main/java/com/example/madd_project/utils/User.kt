@@ -6,6 +6,7 @@ data class User(
     var userPass :String? =null,
     val fullName : String? = null,
     val userAddress : String? = null,
-    val userContactNo: String? = null
+    val userContactNo: String? = null,
+    val Url :  String? = null
 
 )
