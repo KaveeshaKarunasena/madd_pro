@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/post_nav"
+    app:startDestination="@id/postHomeFragment">
+
+    <fragment
+        android:id="@+id/postHomeFragment"
+        android:name="com.example.madd_project.fragments.postfragment.PostHomeFragment"
+        android:label="fragment_post_home"
+        tools:layout="@layout/fragment_post_home" >
+        <action
+            android:id="@+id/action_postHomeFragment_to_createFragment"
+            app:destination="@id/createFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createFragment"
+        android:name="com.example.madd_project.fragments.postfragment.CreateFragment"
+        android:label="fragment_create"
+        tools:layout="@layout/fragment_create" >
+        <action
+            android:id="@+id/action_createFragment_to_postHomeFragment"
+            app:destination="@id/postHomeFragment" />
+    </fragment>
+</navigation>
