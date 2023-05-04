@@ -2,6 +2,8 @@ package com.example.madd_project
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.madd_project.databinding.ActivitySignInBinding
@@ -16,6 +18,8 @@ class SignIn : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
 
         firebaseAuth = FirebaseAuth.getInstance()
@@ -47,12 +51,14 @@ class SignIn : AppCompatActivity() {
         }
     }
 
-//    override fun onStart() {
-//        super.onStart()
-//
-//        if(firebaseAuth.currentUser != null){
-//            val intent = Intent(this, Dashboard::class.java)
-//            startActivity(intent)
-//        }
-//    }
+
+
+    override fun onStart() {
+        super.onStart()
+
+        if(firebaseAuth.currentUser != null){
+            val intent = Intent(this, Dashboard::class.java)
+            startActivity(intent)
+        }
+    }
 }

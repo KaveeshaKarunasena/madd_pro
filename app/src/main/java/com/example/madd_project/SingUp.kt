@@ -66,9 +66,10 @@ class SingUp : AppCompatActivity() {
         val fullName : String? = null
         val userAddress : String? = null
         val userContactNo: String? = null
+        val status : String? = "ACTIVATE"
         val uid = firebaseAuth.currentUser?.uid.toString()
 
-        val user = User(uid,userEmail,userPass,fullName,userAddress,userContactNo)
+        val user = User(uid,userEmail,userPass,fullName,userAddress,userContactNo,status)
         dbRef.child(uid).setValue(user).addOnCompleteListener {
             Toast.makeText(this, "Data Inserted Successfully", Toast.LENGTH_SHORT).show()
         }.addOnFailureListener { err ->
