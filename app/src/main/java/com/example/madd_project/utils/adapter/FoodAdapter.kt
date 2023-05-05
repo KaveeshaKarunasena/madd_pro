@@ -9,10 +9,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madd_project.R
+import com.example.madd_project.models.Posts
 
-class FoodAdapter (private val foodList:ArrayList<Food>):RecyclerView.Adapter<FoodAdapter.FoodViewHolder>(){
+class FoodAdapter (private val foodList:ArrayList<Posts>):RecyclerView.Adapter<FoodAdapter.FoodViewHolder>(){
 
-    var onItemClick: ((Food) -> Unit)? =  null
+    var onItemClick: ((Posts) -> Unit)? =  null
 
     class FoodViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
 
@@ -31,7 +32,7 @@ class FoodAdapter (private val foodList:ArrayList<Food>):RecyclerView.Adapter<Fo
 
     override fun onBindViewHolder(holder: FoodViewHolder, position: Int) {
         val food = foodList[position]
-        holder.imageView.setImageResource(food.image)
+        holder.imageView.setImageResource(food.imageUrl)
         holder.textView.text=food.name
 
         holder.itemView.setOnClickListener{

@@ -13,14 +13,17 @@ import com.example.madd_project.R
 import com.example.madd_project.databinding.FragmentHomeBinding
 import com.example.madd_project.databinding.FragmentProfileBinding
 import com.example.madd_project.databinding.FragmentViewPostBinding
+import com.example.madd_project.models.Posts
 import com.example.madd_project.utils.adapter.FoodAdapter
+import com.google.firebase.database.*
 
 
 class HomeFragment : Fragment() {
 
+    private lateinit var dbRef :  DatabaseReference
     private lateinit var binding : FragmentHomeBinding
     private lateinit var recyclerView : RecyclerView
-    private lateinit var foodList : ArrayList<Food>
+    private lateinit var foodList : ArrayList<Posts>
     private lateinit var foodAdapter: FoodAdapter
 
     override fun onCreateView(
@@ -35,8 +38,9 @@ class HomeFragment : Fragment() {
         recyclerView.layoutManager= LinearLayoutManager(activity)
 
         foodList = ArrayList()
+        getPostData()
 
-        foodAdapter = FoodAdapter() // need to pass array from the db
+         // need to pass array from the db
 
         recyclerView.adapter = foodAdapter
 
@@ -48,6 +52,29 @@ class HomeFragment : Fragment() {
 
         return binding.root
 
+    }
+
+    private fun getPostData() {
+        dbRef = FirebaseDatabase.getInstance().getReference("Posts")
+
+        dbRef.addValueEventListener(object:ValueEventListener{
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    for(postSnapshot in snapshot.children){
+                        val post = postSnapshot.getValue(Posts::class.java)
+                        foodList.add(post!!)
+
+                    }
+                    foodAdapter = FoodAdapter(foodList)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
     }
 
 
