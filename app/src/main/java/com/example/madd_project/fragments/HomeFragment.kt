@@ -38,35 +38,30 @@ class HomeFragment : Fragment() {
         recyclerView.layoutManager= LinearLayoutManager(activity)
 
         foodList = ArrayList()
-        getPostData()
-
-         // need to pass array from the db
-
-        recyclerView.adapter = foodAdapter
-
-        foodAdapter.onItemClick = {
-            val intent = Intent(activity,FragmentViewPostBinding::class.java)
-            intent.putExtra("food",it)
-            startActivity(intent)
-        }
-
-        return binding.root
-
-    }
-
-    private fun getPostData() {
         dbRef = FirebaseDatabase.getInstance().getReference("Posts")
 
         dbRef.addValueEventListener(object:ValueEventListener{
 
             override fun onDataChange(snapshot: DataSnapshot) {
+
                 if(snapshot.exists()){
                     for(postSnapshot in snapshot.children){
                         val post = postSnapshot.getValue(Posts::class.java)
                         foodList.add(post!!)
+                        println("here")
 
                     }
                     foodAdapter = FoodAdapter(foodList)
+
+                    recyclerView.adapter = foodAdapter
+
+                    foodAdapter.onItemClick = {
+                        val intent = Intent(activity,FragmentViewPostBinding::class.java)
+                        intent.putExtra("food",it)
+                        startActivity(intent)
+                    }
+
+
                 }
             }
 
@@ -75,7 +70,37 @@ class HomeFragment : Fragment() {
             }
 
         })
+
+
+
+
+        return binding.root
+
     }
+
+//    private fun getPostData() {
+//        dbRef = FirebaseDatabase.getInstance().getReference("Posts")
+//
+//        dbRef.addValueEventListener(object:ValueEventListener{
+//
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                if(snapshot.exists()){
+//                    for(postSnapshot in snapshot.children){
+//                        val post = postSnapshot.getValue(Posts::class.java)
+//                        foodList.add(post!!)
+//
+//                    }
+//                    foodAdapter = FoodAdapter(foodList)
+//                    recyclerView.adapter = foodAdapter
+//                }
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//
+//            }
+//
+//        })
+//    }
 
 
 }

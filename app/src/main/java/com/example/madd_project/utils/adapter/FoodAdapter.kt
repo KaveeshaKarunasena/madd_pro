@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madd_project.R
 import com.example.madd_project.models.Posts
+import com.squareup.picasso.Picasso
 
 class FoodAdapter (private val foodList:ArrayList<Posts>):RecyclerView.Adapter<FoodAdapter.FoodViewHolder>(){
 
@@ -32,7 +33,7 @@ class FoodAdapter (private val foodList:ArrayList<Posts>):RecyclerView.Adapter<F
 
     override fun onBindViewHolder(holder: FoodViewHolder, position: Int) {
         val food = foodList[position]
-        holder.imageView.setImageResource(food.imageUrl)
+        Picasso.get().load(food.imageUrl).into(holder.imageView)
         holder.textView.text=food.name
 
         holder.itemView.setOnClickListener{

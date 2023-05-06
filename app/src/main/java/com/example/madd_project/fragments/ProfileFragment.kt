@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.madd_project.R
 import com.example.madd_project.databinding.FragmentProfileBinding
 import com.example.madd_project.utils.User
@@ -14,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -25,7 +28,7 @@ class ProfileFragment : Fragment() {
     private lateinit var dbRef : DatabaseReference
     private lateinit var database : FirebaseDatabase
     private lateinit var storage : FirebaseStorage
-    private lateinit var selectedImg : Uri
+    private var selectedImg : Uri? = null
     lateinit var uid :String
     lateinit var user :User
 
@@ -49,10 +52,11 @@ class ProfileFragment : Fragment() {
         }
 
         binding.proPic.setOnClickListener{
-            val intent = Intent()
-            intent.action =  Intent.ACTION_GET_CONTENT
-            intent.type="image/*"
-            startActivityForResult(intent,1)
+            resultLauncher.launch("image/*")
+//            val intent = Intent()
+//            intent.action =  Intent.ACTION_GET_CONTENT
+//            intent.type="image/*"
+//            startActivityForResult(intent,1)
         }
 
         binding.submitBtn.setOnClickListener{
@@ -61,23 +65,32 @@ class ProfileFragment : Fragment() {
             val userEmail = binding.emailText3.text.toString()
             val userContactNo = binding.contactText3.text.toString()
 
+
             updateData(userName,userAddress,userEmail,userContactNo)
         }
         return binding.root
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+    private val resultLauncher = registerForActivityResult(
 
-        if(data != null){
+        ActivityResultContracts.GetContent()){
+            selectedImg = it
+        binding.proPic.setImageURI(it)
 
-            if(data.data != null){
-                selectedImg = data.data!!
-
-                binding.proPic.setImageURI(selectedImg)
-            }
-        }
     }
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+//        if(data != null){
+//            println("data : $data")
+//
+//            if(data.data != null){
+//                selectedImg = data.data!!
+//
+//                binding.proPic.setImageURI(selectedImg)
+//            }
+//        }
+//    }
 
     private fun updateData(userName: String, userAddress: String, userEmail: String, userContactNo: String) {
         val userHash : HashMap<String,String> = HashMap<String, String> ()
@@ -87,17 +100,26 @@ class ProfileFragment : Fragment() {
         userHash["userAddress"] = userAddress
         userHash["userContactNo"] = userContactNo
 
+
         val reference = storage.reference.child("Profile").child(Date().time.toString())
-        reference.putFile(selectedImg).addOnCompleteListener{
+        selectedImg?.let {
+            reference.putFile(it).addOnCompleteListener{
 
-            if(it.isSuccessful){
-                reference.downloadUrl.addOnSuccessListener {task->
-                    userHash["Url"] = task.toString()
+                if(it.isSuccessful){
+                    reference.downloadUrl.addOnSuccessListener {task->
+                        val userPic : HashMap<String,String> = HashMap<String, String> ()
+                        val tsk = task.toString()
+                        println("URL :  $tsk")
+                        userPic["Url"] = task.toString()
 
+                        dbRef = FirebaseDatabase.getInstance().getReference("Users")
+                        dbRef.child(uid).updateChildren(userPic as Map<String, Any>)
+                        Toast.makeText(activity,"profile pic  updated",Toast.LENGTH_SHORT).show()
+                    }
                 }
+            }.addOnFailureListener { err ->
+                Toast.makeText(activity,"profile pic not updated",Toast.LENGTH_SHORT).show()
             }
-        }.addOnFailureListener { err ->
-            print(err)
         }
 
         dbRef = FirebaseDatabase.getInstance().getReference("Users")
@@ -121,6 +143,7 @@ class ProfileFragment : Fragment() {
                 binding.nameText3.setText(user.fullName)
                 binding.contactText3.setText(user.userContactNo)
                 binding.addressText3.setText(user.userAddress)
+                Picasso.get().load(user.Url).into(binding.proPic)
 
             }
 

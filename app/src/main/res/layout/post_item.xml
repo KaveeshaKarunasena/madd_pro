@@ -21,7 +21,7 @@
             android:src="@drawable/send"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toToptOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textPost"
@@ -35,8 +35,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imagePost"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintTop_toToptOf="parent"
-            app:layput_constranitHorizontal_bias="0.5" />
+             />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
