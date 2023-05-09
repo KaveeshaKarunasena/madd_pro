@@ -4,11 +4,13 @@ import android.content.Intent
 import android.location.Address
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
+import com.example.madd_project.LoadingAlert
 import com.example.madd_project.R
 import com.example.madd_project.databinding.FragmentProfileBinding
 import com.example.madd_project.utils.User
@@ -39,6 +41,16 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentProfileBinding.inflate(layoutInflater,container, false)
 
+        val loading = activity?.let { LoadingAlert(it) }
+        loading?.startLoading()
+        val handler = Handler()
+        handler.postDelayed(object :Runnable{
+            override fun run() {
+                loading?.isDismiss()
+            }
+
+        },5000)
+
         auth = FirebaseAuth.getInstance()
         storage = FirebaseStorage.getInstance()
         uid = auth.currentUser?.uid.toString()
@@ -65,6 +77,15 @@ class ProfileFragment : Fragment() {
             val userEmail = binding.emailText3.text.toString()
             val userContactNo = binding.contactText3.text.toString()
 
+            val loading = activity?.let { LoadingAlert(it) }
+            loading?.startLoading()
+            val handler = Handler()
+            handler.postDelayed(object :Runnable{
+                override fun run() {
+                    loading?.isDismiss()
+                }
+
+            },5000)
 
             updateData(userName,userAddress,userEmail,userContactNo)
         }
@@ -125,6 +146,7 @@ class ProfileFragment : Fragment() {
         dbRef = FirebaseDatabase.getInstance().getReference("Users")
         dbRef.child(uid).updateChildren(userHash as Map<String, Any>).addOnCompleteListener {
 
+            Toast.makeText(activity,"profile updated",Toast.LENGTH_SHORT).show()
         }.addOnFailureListener { err ->
             print(err)
         }

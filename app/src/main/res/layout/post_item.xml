@@ -36,6 +36,13 @@
             app:layout_constraintStart_toEndOf="@+id/imagePost"
             app:layout_constraintTop_toTopOf="parent"
              />
+        <TextView
+            android:id="@+id/textId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="001"
+            android:visibility="invisible"/>
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

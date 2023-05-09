@@ -5,6 +5,7 @@ import android.icu.text.Transliterator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +21,8 @@ class FoodAdapter (private val foodList:ArrayList<Posts>):RecyclerView.Adapter<F
 
         val imageView : ImageView = itemView.findViewById(R.id.imagePost)
         val textView : TextView = itemView.findViewById(R.id.textPost)
+        val textId :TextView = itemView.findViewById(R.id.textId)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
@@ -35,9 +38,10 @@ class FoodAdapter (private val foodList:ArrayList<Posts>):RecyclerView.Adapter<F
         val food = foodList[position]
         Picasso.get().load(food.imageUrl).into(holder.imageView)
         holder.textView.text=food.name
+        holder.textId.text = food.id
 
         holder.itemView.setOnClickListener{
-            onItemClick?.invoke(food)
+             onItemClick?.invoke(food)
         }
     }
 }

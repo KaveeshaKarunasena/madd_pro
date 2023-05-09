@@ -44,6 +44,7 @@ class SingUp : AppCompatActivity() {
                         if (it.isSuccessful) {
                             val intent = Intent(this, SignIn::class.java)
                             saveUserData()
+                            Toast.makeText(this, "Data Inserted Successfully", Toast.LENGTH_SHORT).show()
                             startActivity(intent)
                         } else {
                             Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
