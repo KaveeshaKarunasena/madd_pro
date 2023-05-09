@@ -42,7 +42,7 @@ class Dashboard : AppCompatActivity() {
         val fragmentHome = HomeFragment()
         auth = FirebaseAuth.getInstance()
 
-
+//        nav.selectedItemId = R.id.homeFrag
         home.setOnClickListener { data ->
 
             supportFragmentManager.beginTransaction().apply {
@@ -136,4 +136,5 @@ class Dashboard : AppCompatActivity() {
         inflater.inflate(R.menu.profile_menu,menu)
         return true
     }
+
 }
