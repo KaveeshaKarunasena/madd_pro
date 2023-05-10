@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/adminhomeFragment">
+
+    <fragment
+        android:id="@+id/adminhomeFragment"
+        android:name="com.example.madd_project.AdminHomeFragment"
+        android:label="DashBoard"
+        tools:layout="@layout/fragment_adminhome" >
+        <action
+            android:id="@+id/action_adminhomeFragment_to_driverHomeFragment"
+            app:destination="@id/driverHomeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_homeMain"
+            app:destination="@id/homeMain" />
+    </fragment>
+    <fragment
+        android:id="@+id/driverHomeFragment"
+        android:name="com.example.madd_project.DriverHomeFragment"
+        android:label="Driver Home Page"
+        tools:layout="@layout/fragment_driver_home" >
+        <action
+            android:id="@+id/action_driverHomeFragment_to_addDriverFragment"
+            app:destination="@id/addDriverFragment" />
+        <action
+            android:id="@+id/action_driverHomeFragment_to_homeFragment"
+            app:destination="@id/adminhomeFragment" />
+        <action
+            android:id="@+id/action_driverHomeFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addDriverFragment"
+        android:name="com.example.madd_project.AddDriverFragment"
+        android:label="Add Driver Page"
+        tools:layout="@layout/fragment_add_driver" >
+        <action
+            android:id="@+id/action_addDriverFragment_to_driverHomeFragment"
+            app:destination="@id/driverHomeFragment" />
+        <action
+            android:id="@+id/action_addDriverFragment_to_homeFragment"
+            app:destination="@id/adminhomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeMain"
+        android:name="com.example.madd_project.HomeMain"
+        android:label="Main Home Page "
+        tools:layout="@layout/fragment_home_main" >
+        <action
+            android:id="@+id/action_homeMain_to_homeFragment"
+            app:destination="@id/adminhomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.example.madd_project.UpdateFragment"
+        android:label="Driver Update"
+        tools:layout="@layout/fragment_update" >
+        <action
+            android:id="@+id/action_updateFragment_to_driverHomeFragment"
+            app:destination="@id/driverHomeFragment" />
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="username"
+            app:argType="string" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="phone"
+            app:argType="string" />
+        <argument
+            android:name="vehiclenumber"
+            app:argType="string" />
+        <argument
+            android:name="password"
+            app:argType="string" />
+    </fragment>
+</navigation>
