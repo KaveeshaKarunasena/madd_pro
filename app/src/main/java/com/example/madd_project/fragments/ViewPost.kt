@@ -1,5 +1,6 @@
 package com.example.madd_project.fragments
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.Intent.getIntent
 import android.content.pm.PackageManager
@@ -17,7 +18,6 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.navigation.fragment.findNavController
 import com.example.madd_project.LoadingAlert
-import com.example.madd_project.Manifest
 import com.example.madd_project.R
 import com.example.madd_project.SignIn
 import com.example.madd_project.databinding.FragmentHomeBinding
@@ -40,6 +40,7 @@ class ViewPost : Fragment() {
     lateinit var user :User
     private lateinit var uid :String
 
+    @SuppressLint("UnlocalizedSms")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -94,7 +95,7 @@ class ViewPost : Fragment() {
 //                commit()
 
             var obj = SmsManager.getDefault()
-            obj.sendTextMessage("0755620819",null,
+            obj.sendTextMessage("+94755620819",null,
              "A donate has made", null, null)
 
             Toast.makeText(activity,"message sent",Toast.LENGTH_SHORT).show()
