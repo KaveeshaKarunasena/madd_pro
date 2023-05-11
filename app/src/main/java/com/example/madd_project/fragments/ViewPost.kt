@@ -2,16 +2,22 @@ package com.example.madd_project.fragments
 
 import android.content.Intent
 import android.content.Intent.getIntent
+import android.content.pm.PackageManager
 import android.location.Address
 import android.os.Bundle
 import android.os.Handler
+import android.telephony.SmsManager
+import android.text.TextUtils.replace
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.navigation.fragment.findNavController
 import com.example.madd_project.LoadingAlert
+import com.example.madd_project.Manifest
 import com.example.madd_project.R
 import com.example.madd_project.SignIn
 import com.example.madd_project.databinding.FragmentHomeBinding
@@ -78,11 +84,31 @@ class ViewPost : Fragment() {
 
         binding.donateBtn.setOnClickListener {
             saveDonate()
+
+            val transaction = fragmentManager?.beginTransaction()
+            val fragmentHome = HomeFragment()
+            transaction?.replace(R.id.container,fragmentHome)?.commit()
+
+//            supportFragmentManager.beginTransaction().apply {
+//                replace(R.id.container, )
+//                commit()
+
+            var obj = SmsManager.getDefault()
+            obj.sendTextMessage("0755620819",null,
+             "A donate has made", null, null)
+
+            Toast.makeText(activity,"message sent",Toast.LENGTH_SHORT).show()
+
         }
 
         return binding.root
     }
 
+//    private fun checkPermissions(){
+//        if(activity?.let { ActivityCompat.checkSelfPermission(it, Manifest.permission.SEND_SMS) } != PackageManager.PERMISSION_GRANTE){
+//            activity?.let { ActivityCompat.requestPermissions(it, arrayOf(Manifest.permission.SEND_SMS),101) }
+//        }
+//    }
 
     private fun getPostData(id:String) {
         println("id:$id")
@@ -129,8 +155,10 @@ class ViewPost : Fragment() {
                 val donate = Donate(fullName, userEmail, contactNo, userAddress, donates)
                 dbRef = FirebaseDatabase.getInstance().getReference("Donate")
                 dbRef.child(uid).setValue(donate).addOnCompleteListener {
+                    binding.editTextNumber.text = null
                     Toast.makeText(activity, "Data Inserted Successfully", Toast.LENGTH_SHORT)
                         .show()
+
                 }.addOnFailureListener { err ->
                     print(err)
                 }
@@ -144,4 +172,6 @@ class ViewPost : Fragment() {
         })
 
     }
+
+
 }
