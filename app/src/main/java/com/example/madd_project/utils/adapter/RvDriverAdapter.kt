@@ -44,7 +44,7 @@ class RvDriverAdapter(private val driverList : java.util.ArrayList<Drivers>) : R
                         currentItem.email.toString(),
                         currentItem.phone.toString(),
                         currentItem.vehiclenumber.toString(),
-                        currentItem.password.toString()
+                        currentItem.dpassword.toString()
                     )
                     findNavController(holder.itemView).navigate(action)
                 }
