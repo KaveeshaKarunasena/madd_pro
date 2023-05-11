@@ -7,5 +7,5 @@ data class Drivers(
     val email : String? = null,
     val phone : String? = null,
     val vehiclenumber : String? = null,
-    val password : String? = null
+    val dpassword : String? = null
 )
