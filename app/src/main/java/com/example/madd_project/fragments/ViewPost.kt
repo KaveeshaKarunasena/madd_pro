@@ -1,26 +1,19 @@
 package com.example.madd_project.fragments
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.Intent.getIntent
 import android.content.pm.PackageManager
-import android.location.Address
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
-import android.telephony.SmsManager
-import android.text.TextUtils.replace
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
 import com.example.madd_project.LoadingAlert
 import com.example.madd_project.R
-import com.example.madd_project.SignIn
-import com.example.madd_project.databinding.FragmentHomeBinding
 import com.example.madd_project.databinding.FragmentViewPostBinding
 import com.example.madd_project.models.Donate
 import com.example.madd_project.models.Posts
@@ -28,7 +21,6 @@ import com.example.madd_project.utils.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
-
 
 
 class ViewPost : Fragment() {
@@ -60,7 +52,7 @@ class ViewPost : Fragment() {
             }
 
         },6000)
-        val food = this.arguments?.getParcelable<Posts>("food",)
+        val food = this.arguments?.getParcelable<Posts>("food")
 
 
         if(food !=null){
@@ -90,26 +82,30 @@ class ViewPost : Fragment() {
             val fragmentHome = HomeFragment()
             transaction?.replace(R.id.container,fragmentHome)?.commit()
 
-//            supportFragmentManager.beginTransaction().apply {
-//                replace(R.id.container, )
-//                commit()
+            val phoneNo = "+94766974709"
+//            val smsIntent = Intent(Intent.ACTION_VIEW)
+//            smsIntent.data = Uri.parse("sms:$phoneNo")
+//            startActivity(smsIntent)
 
-            var obj = SmsManager.getDefault()
-            obj.sendTextMessage("+94755620819",null,
-             "A donate has made", null, null)
+            val uri = Uri.parse("sms:$phoneNo")
+            val intent = Intent(Intent.ACTION_SENDTO, uri)
+            intent.putExtra("sms_body", "The SMS text")
+            startActivity(intent)
 
-            Toast.makeText(activity,"message sent",Toast.LENGTH_SHORT).show()
 
         }
+        checkPermissions()
+
+
 
         return binding.root
     }
 
-//    private fun checkPermissions(){
-//        if(activity?.let { ActivityCompat.checkSelfPermission(it, Manifest.permission.SEND_SMS) } != PackageManager.PERMISSION_GRANTE){
-//            activity?.let { ActivityCompat.requestPermissions(it, arrayOf(Manifest.permission.SEND_SMS),101) }
-//        }
-//    }
+    private fun checkPermissions(){
+        if(activity?.let { ActivityCompat.checkSelfPermission(it, Manifest.permission.SEND_SMS) } != PackageManager.PERMISSION_GRANTED){
+            activity?.let { ActivityCompat.requestPermissions(it, arrayOf(Manifest.permission.SEND_SMS),101) }
+        }
+    }
 
     private fun getPostData(id:String) {
         println("id:$id")
@@ -156,10 +152,6 @@ class ViewPost : Fragment() {
                 val donate = Donate(fullName, userEmail, contactNo, userAddress, donates)
                 dbRef = FirebaseDatabase.getInstance().getReference("Donate")
                 dbRef.child(uid).setValue(donate).addOnCompleteListener {
-                    binding.editTextNumber.text = null
-                    Toast.makeText(activity, "Data Inserted Successfully", Toast.LENGTH_SHORT)
-                        .show()
-
                 }.addOnFailureListener { err ->
                     print(err)
                 }
