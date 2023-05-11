@@ -31,10 +31,7 @@ class MainActivity : AppCompatActivity() {
 //        }
 
 
-        setContentView(binding.root)
-        val navController = findNavController(R.id.fragmentContainerView)
-        val appBarConfiguration= AppBarConfiguration(setOf(R.id.postHomeFragment,R.id.Create_Post))
-        setupActionBarWithNavController(navController,appBarConfiguration)
+
     }
 
     // this event will enable the back

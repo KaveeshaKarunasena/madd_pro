@@ -42,14 +42,14 @@ class AddDriverFragment : Fragment() {
         val email = binding.email.text.toString()
         val phone = binding.phone.text.toString()
         val vehiclenumber = binding.vehiclenumber.text.toString()
-        val password = binding.password.text.toString()
+        val password = binding.dpassword.text.toString()
 
         if(name.isEmpty()) binding.name.error = "Add a Name"
         if(username.isEmpty()) binding.username.error = "Add a UserName"
         if(email.isEmpty()) binding.email.error = "Add a Email"
         if(phone.isEmpty()) binding.phone.error = "Add a Phone"
         if(vehiclenumber.isEmpty()) binding.vehiclenumber.error = "Add a VehicleNumber"
-        if(password.isEmpty()) binding.password.error = "Add a Password"
+        if(password.isEmpty()) binding.dpassword.error = "Add a Password"
 
         val driverId = firebaseRef.push().key!!
         val drivers = Drivers(driverId,name,email,phone,vehiclenumber,password )
