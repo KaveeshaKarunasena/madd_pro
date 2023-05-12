@@ -21,6 +21,7 @@ import com.example.madd_project.utils.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
+import java.lang.Integer.parseInt
 
 
 class ViewPost : Fragment() {
@@ -152,6 +153,15 @@ class ViewPost : Fragment() {
                 val donate = Donate(fullName, userEmail, contactNo, userAddress, donates)
                 dbRef = FirebaseDatabase.getInstance().getReference("Donate")
                 dbRef.child(uid).setValue(donate).addOnCompleteListener {
+
+//                    val qut =binding.textQuantity.text.toString()
+//                    val quantityReal = parseInt(qut) - parseInt(donates)
+
+//                    val postHash  : HashMap<String,String> = HashMap<String, String> ()
+//                    postHash["copyQuantity"] = quantityReal
+//
+//                    dbRef = FirebaseDatabase.getInstance().getReference("Posts")
+//                    dbRef.child(uid).updateChildren(postHash as Map<String, Any>)
                 }.addOnFailureListener { err ->
                     print(err)
                 }
