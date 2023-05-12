@@ -1,4 +1,4 @@
-package com.example.fragments
+package com.example.madd_project
 
 import android.net.Uri
 import android.os.Build
@@ -11,9 +11,8 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
-import com.example.models.Posts
-import com.example.newapp.R
-import com.example.newapp.databinding.FragmentCreateBinding
+import com.example.madd_project.models.Posts
+import com.example.madd_project.databinding.FragmentCreateBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage

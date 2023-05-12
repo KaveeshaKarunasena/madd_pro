@@ -14,14 +14,14 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 
-class rvPostAdapter(private val postList: java.util.ArrayList<Posts>) : RecyclerView.Adapter< rvPostAdapter.ViewHolder>(){
+class RvPostAdapter(private val postList: java.util.ArrayList<Posts>) : RecyclerView.Adapter< RvPostAdapter.ViewHolder>(){
     class ViewHolder(val binding: RvPostsBinding) : RecyclerView.ViewHolder(binding.root){
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-       return ViewHolder(RvPostsBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return ViewHolder(RvPostsBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
     override fun getItemCount(): Int {
@@ -38,13 +38,13 @@ class rvPostAdapter(private val postList: java.util.ArrayList<Posts>) : Recycler
                 tvQuantity.text = currentItem.quantity
 
                 rvDesc.setOnClickListener{
-                   val action = PostHomeFragmentDirections.actionHomeFragmentToUpdateFragment(
+                    val action = PostHomeFragmentDirections.actionHomeFragmentToUpdateFragment(
                         currentItem.id.toString(),
-                       currentItem.name.toString(),
-                       currentItem.dueDate.toString(),
-                       currentItem.description.toString(),
-                       currentItem.quantity.toString(),
-                       currentItem.imageUrl.toString()
+                        currentItem.name.toString(),
+                        currentItem.dueDate.toString(),
+                        currentItem.description.toString(),
+                        currentItem.quantity.toString(),
+                        currentItem.imageUrl.toString()
                     )
                     findNavController(holder.itemView).navigate(action)
                 }
@@ -54,7 +54,7 @@ class rvPostAdapter(private val postList: java.util.ArrayList<Posts>) : Recycler
                         .setMessage("Are you sure you want to delete this item")
                         .setPositiveButton("Yes"){
                                 _,_-> val firebaseRef = FirebaseDatabase.getInstance().getReference("Posts")
-                                      val storageRef = FirebaseStorage.getInstance().getReference("Images")
+                            val storageRef = FirebaseStorage.getInstance().getReference("Images")
                             storageRef.child(currentItem.id.toString()).delete()
 
                             currentItem.id?.let { it ->

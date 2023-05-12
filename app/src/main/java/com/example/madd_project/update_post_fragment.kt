@@ -1,4 +1,4 @@
-package com.example.fragments
+package com.example.madd_project
 
 import android.os.Bundle
 import android.view.LayoutInflater

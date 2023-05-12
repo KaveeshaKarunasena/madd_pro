@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/post_nav"
+    app:startDestination="@id/createFragment">
+
+    <fragment
+        android:id="@+id/createFragment"
+        android:name="com.example.fragments.CreateFragment"
+        android:label="Create a post"
+        tools:layout="@layout/fragment_create" >
+        <action
+            android:id="@+id/action_createFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.fragments.PostHomeFragment"
+        android:label="posts"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_createFragment"
+            app:destination="@id/createFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_update_Fragment"
+            app:destination="@id/update_Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/update_Fragment"
+        android:name="com.example.fragments.update_post_fragment"
+        android:label="Update post"
+        tools:layout="@layout/fragment_update" >
+        <action
+            android:id="@+id/action_update_Fragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="quantity"
+            app:argType="string" />
+        <argument
+            android:name="description"
+            app:argType="string" />
+        <argument android:name="due_date"
+            app:argType="string" />
+        <argument
+            android:name="imageUrl"
+            app:argType="string" />
+    </fragment>
+</navigation>

@@ -28,7 +28,7 @@ class AdminHomeFragment : Fragment() {
         }
 
         binding.cardDriver.setOnClickListener{
-            findNavController().navigate(R.id.action_adminhomeFragmentt_to_driverHomeFragment)
+            findNavController().navigate(R.id.action_adminhomeFragment_to_driverHomeFragment)
 
         }
 
