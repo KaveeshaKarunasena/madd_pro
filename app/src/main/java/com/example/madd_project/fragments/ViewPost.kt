@@ -1,20 +1,21 @@
 package com.example.madd_project.fragments
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.Intent.getIntent
-import android.location.Address
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
 import com.example.madd_project.LoadingAlert
 import com.example.madd_project.R
-import com.example.madd_project.SignIn
-import com.example.madd_project.databinding.FragmentHomeBinding
 import com.example.madd_project.databinding.FragmentViewPostBinding
 import com.example.madd_project.models.Donate
 import com.example.madd_project.models.Posts
@@ -22,7 +23,9 @@ import com.example.madd_project.utils.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
-
+import java.lang.Integer.parseInt
+import java.time.LocalDate
+import java.util.*
 
 
 class ViewPost : Fragment() {
@@ -33,7 +36,10 @@ class ViewPost : Fragment() {
     private lateinit var dbRef : DatabaseReference
     lateinit var user :User
     private lateinit var uid :String
+    private lateinit var donateName :String
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    @SuppressLint("UnlocalizedSms")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,7 +59,7 @@ class ViewPost : Fragment() {
             }
 
         },6000)
-        val food = this.arguments?.getParcelable<Posts>("food",)
+        val food = this.arguments?.getParcelable<Posts>("food")
 
 
         if(food !=null){
@@ -67,6 +73,7 @@ class ViewPost : Fragment() {
 
 
             textView.text = food.name
+            donateName = food.name.toString()
             Picasso.get().load(food.imageUrl).into(imageView)
 //            description.text=food.description
 //            quantity.text = food.quantity
@@ -78,11 +85,35 @@ class ViewPost : Fragment() {
 
         binding.donateBtn.setOnClickListener {
             saveDonate()
+
+            val transaction = fragmentManager?.beginTransaction()
+            val fragmentHome = HomeFragment()
+            transaction?.replace(R.id.container,fragmentHome)?.commit()
+
+            val phoneNo = "+94766974709"
+//            val smsIntent = Intent(Intent.ACTION_VIEW)
+//            smsIntent.data = Uri.parse("sms:$phoneNo")
+//            startActivity(smsIntent)
+
+            val uri = Uri.parse("sms:$phoneNo")
+            val intent = Intent(Intent.ACTION_SENDTO, uri)
+            intent.putExtra("sms_body", "The SMS text")
+            startActivity(intent)
+
+
         }
+        checkPermissions()
+
+
 
         return binding.root
     }
 
+    private fun checkPermissions(){
+        if(activity?.let { ActivityCompat.checkSelfPermission(it, Manifest.permission.SEND_SMS) } != PackageManager.PERMISSION_GRANTED){
+            activity?.let { ActivityCompat.requestPermissions(it, arrayOf(Manifest.permission.SEND_SMS),101) }
+        }
+    }
 
     private fun getPostData(id:String) {
         println("id:$id")
@@ -111,9 +142,11 @@ class ViewPost : Fragment() {
 //        })
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun saveDonate() {
         dbRef = FirebaseDatabase.getInstance().getReference("Posts")
         val donates = binding.editTextNumber.text.toString()
+        val donateDate = LocalDate.now().toString()
 
         println("userID:$uid")
         dbRef = FirebaseDatabase.getInstance().getReference("Users")
@@ -126,11 +159,18 @@ class ViewPost : Fragment() {
                 val contactNo = user.userContactNo
                 val userAddress = user.userAddress
 
-                val donate = Donate(fullName, userEmail, contactNo, userAddress, donates)
+                val donate = Donate(fullName, userEmail, contactNo, userAddress, donateName , donates, donateDate)
                 dbRef = FirebaseDatabase.getInstance().getReference("Donate")
                 dbRef.child(uid).setValue(donate).addOnCompleteListener {
-                    Toast.makeText(activity, "Data Inserted Successfully", Toast.LENGTH_SHORT)
-                        .show()
+
+                    val qut =binding.textQuantity.text.toString()
+                    val quantityReal = parseInt(qut) - parseInt(donates)
+
+                    val donateHash  : HashMap<String,String> = HashMap<String, String> ()
+                    donateHash["copyQuantity"] = quantityReal.toString()
+
+                    dbRef = FirebaseDatabase.getInstance().getReference("Posts")
+                    dbRef.child(uid).updateChildren(donateHash as Map<String, Any>)
                 }.addOnFailureListener { err ->
                     print(err)
                 }
@@ -144,4 +184,6 @@ class ViewPost : Fragment() {
         })
 
     }
+
+
 }

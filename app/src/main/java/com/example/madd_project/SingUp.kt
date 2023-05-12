@@ -38,26 +38,63 @@ class SingUp : AppCompatActivity() {
             val confirmPass = binding.confirmPassEt.text.toString()
 
             if (email.isNotEmpty() && pass.isNotEmpty() && confirmPass.isNotEmpty()) {
-                if (pass == confirmPass) {
-
-                    firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            val intent = Intent(this, SignIn::class.java)
-                            saveUserData()
-                            Toast.makeText(this, "Data Inserted Successfully", Toast.LENGTH_SHORT).show()
-                            startActivity(intent)
-                        } else {
-                            Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
-
+                if (pass.length >= 6) {
+                    var hasLowe = false
+                    var hasUpper = false
+                    var hasNumber = false
+                    var hasSpecial = false
+                    for (cha in pass) {
+                        if (Character.isLowerCase(cha)) {
+                            hasLowe = true
+                        } else if (Character.isUpperCase(cha)) {
+                            hasUpper = true
+                        } else if (Character.isDigit(cha)) {
+                            hasNumber = true
+                        } else if (!Character.isLetterOrDigit(cha)) {
+                            hasSpecial = true
                         }
                     }
-                } else {
-                    Toast.makeText(this, "Password is not matching", Toast.LENGTH_SHORT).show()
-                }
-            } else {
-                Toast.makeText(this, "Empty Fields Are not Allowed !!", Toast.LENGTH_SHORT).show()
+                    if (hasLowe && hasUpper && hasNumber && hasSpecial) {
+                        if (pass == confirmPass) {
+                            firebaseAuth.createUserWithEmailAndPassword(email, pass)
+                                .addOnCompleteListener {
+                                    if (it.isSuccessful) {
+                                        val intent = Intent(this, SignIn::class.java)
+                                        saveUserData()
+                                        Toast.makeText(
+                                            this,
+                                            "Data Inserted Successfully",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        startActivity(intent)
+                                    } else {
+                                        Toast.makeText(
+                                            this,
+                                            it.exception.toString(),
+                                            Toast.LENGTH_SHORT
+                                        ).show()
 
+                                    }
+                                }
+                        } else {
+                            Toast.makeText(this, "Password is not matching", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    } else {
+                        Toast.makeText(
+                            this,
+                            "password should include lower case upper case number and special characters  !!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                    }
+                } else {
+                    Toast.makeText(this, " password Must contain 6 characters!!", Toast.LENGTH_SHORT).show()
+                }
+            }else{
+                Toast.makeText(this, "Empty Fields cannot exits!!", Toast.LENGTH_SHORT).show()
             }
+
         }
     }
 

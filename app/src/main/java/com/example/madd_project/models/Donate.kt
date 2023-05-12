@@ -5,4 +5,6 @@ data class Donate (
     val userEmail: String? = null,
     val contactNo : String? = null,
     val userAddress : String? = null,
-    val donates : String?=null)
+    val donateName :String? =null,
+    val donates : String?=null,
+    val donateDate: String? =null)

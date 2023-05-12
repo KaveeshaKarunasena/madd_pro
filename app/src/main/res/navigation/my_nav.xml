@@ -11,14 +11,11 @@
         android:label="DashBoard"
         tools:layout="@layout/fragment_adminhome" >
         <action
-            android:id="@+id/action_adminhomeFragmentt_to_driverHomeFragment"
+            android:id="@+id/action_adminhomeFragment_to_driverHomeFragment"
             app:destination="@id/driverHomeFragment" />
         <action
-            android:id="@+id/action_adminhomeFragment_to_homeMain"
+            android:id="@+id/action_homeFragment_to_homeMain"
             app:destination="@id/homeMain" />
-        <action
-            android:id="@+id/action_adminhomeFragment_to_updateFragment"
-            app:destination="@id/updateFragment" />
     </fragment>
     <fragment
         android:id="@+id/driverHomeFragment"
@@ -29,7 +26,7 @@
             android:id="@+id/action_driverHomeFragment_to_addDriverFragment"
             app:destination="@id/addDriverFragment" />
         <action
-            android:id="@+id/action_driverHomeFragment_to_adminhomeFragment"
+            android:id="@+id/action_driverHomeFragment_to_homeFragment"
             app:destination="@id/adminhomeFragment" />
         <action
             android:id="@+id/action_driverHomeFragment_to_updateFragment"
@@ -44,7 +41,7 @@
             android:id="@+id/action_addDriverFragment_to_driverHomeFragment"
             app:destination="@id/driverHomeFragment" />
         <action
-            android:id="@+id/action_addDriverFragment_to_adminhomeFragment"
+            android:id="@+id/action_addDriverFragment_to_homeFragment"
             app:destination="@id/adminhomeFragment" />
     </fragment>
     <fragment
@@ -53,7 +50,7 @@
         android:label="Main Home Page "
         tools:layout="@layout/fragment_home_main" >
         <action
-            android:id="@+id/action_homeMain_to_adminhomeFragment"
+            android:id="@+id/action_homeMain_to_homeFragment"
             app:destination="@id/adminhomeFragment" />
     </fragment>
     <fragment

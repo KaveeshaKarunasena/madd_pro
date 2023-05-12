@@ -8,6 +8,7 @@ data class Posts(val id :String?=null,
                  val dueDate:String?=null,
                  val description:String?=null,
                  val quantity:String?=null,
+                 val copyQuantity :String? = null,
                  val imageUrl:String?=null):Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
