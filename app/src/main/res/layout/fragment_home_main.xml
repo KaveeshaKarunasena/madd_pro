@@ -1,14 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".HomeMain">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    android:layout_height="match_parent">
+        <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/tableLayout"
+        tools:context=".HomeMain">
 
-</FrameLayout>
+        <TableRow
+            android:id="@+id/row"
+            android:layout_marginTop="3dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/yellow"
+                android:text="Dirvers"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                />
+
+
+            <TextView
+                android:id="@+id/driverCount"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/yellow"
+                android:text="Row2\nCol2"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="3dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/yellow"
+                android:text="Posts"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                />
+
+
+            <TextView
+                android:id="@+id/postCount"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/yellow"
+                android:text="Row2\nCol2"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="3dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/yellow"
+                android:text="Donators"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                />
+
+
+            <TextView
+                android:id="@+id/donatorCount"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/yellow"
+                android:text="Row2\nCol2"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="3dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/yellow"
+                android:text="Delivered Orders"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                />
+
+
+            <TextView
+                android:id="@+id/dorderCount"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/yellow"
+                android:text="Row2\nCol2"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                />
+        </TableRow>
+    </TableLayout>
+
+
+
+
+
+
+</ScrollView>
