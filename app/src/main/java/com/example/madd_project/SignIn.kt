@@ -7,6 +7,7 @@ import android.view.MenuInflater
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.madd_project.databinding.ActivitySignInBinding
+import com.example.madd_project.fragments.HomeFragment
 import com.google.firebase.auth.FirebaseAuth
 
 class SignIn : AppCompatActivity() {
@@ -37,7 +38,7 @@ class SignIn : AppCompatActivity() {
 
                 firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        val intent = Intent(this, Dashboard::class.java)
+                        val intent = Intent(this, HomeFragment::class.java)
                         startActivity(intent)
                     } else {
                         Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
