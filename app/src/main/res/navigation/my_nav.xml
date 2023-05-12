@@ -11,7 +11,7 @@
         android:label="DashBoard"
         tools:layout="@layout/fragment_adminhome" >
         <action
-            android:id="@+id/action_adminhomeFragmentt_to_driverHomeFragment"
+            android:id="@+id/action_adminhomeFragment_to_driverHomeFragment"
             app:destination="@id/driverHomeFragment" />
         <action
             android:id="@+id/action_adminhomeFragment_to_homeMain"

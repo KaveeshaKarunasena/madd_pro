@@ -38,6 +38,12 @@ class SignIn : AppCompatActivity() {
 
                 firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
                     if (it.isSuccessful) {
+
+                        if(email == "dinushaweerasekara312@gmail.com"){
+                            val intent = Intent(this, AdminHomeFragment::class.java)
+                            startActivity(intent)
+                        }
+
                         val intent = Intent(this, HomeFragment::class.java)
                         startActivity(intent)
                     } else {

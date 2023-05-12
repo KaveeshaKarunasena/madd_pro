@@ -43,5 +43,3 @@ data class Posts(val id :String?=null,
         }
     }
 }
-
-

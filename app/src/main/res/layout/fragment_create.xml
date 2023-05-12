@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:padding="10dp"
-    tools:context=".fragments.postfragment.CreateFragment">
+    tools:context=".CreateFragment">
 
     <!-- TODO: Update blank fragment layout -->
 

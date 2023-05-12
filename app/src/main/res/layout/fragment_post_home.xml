@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.postfragment.PostHomeFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    tools:context=".PostHomeFragment">
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+
+    <Button
         android:id="@+id/btnAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,6 +20,7 @@
         tools:ignore="MissingConstraints" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/postrecyclerview"
         android:layout_width="411dp"
         android:layout_height="733dp"
         app:layout_constraintBottom_toBottomOf="parent"
