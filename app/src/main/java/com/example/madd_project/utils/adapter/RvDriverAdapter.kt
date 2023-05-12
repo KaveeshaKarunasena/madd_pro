@@ -2,9 +2,11 @@ package com.example.madd_project.utils.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import androidx.navigation.Navigation.findNavController
+import com.example.madd_project.databinding.ActivityMainBinding
 import com.example.madd_project.DriverHomeFragmentDirections
+import androidx.navigation.Navigation.findNavController
 import com.example.madd_project.databinding.RvDriversItemsBinding
 import com.example.madd_project.models.Drivers
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
